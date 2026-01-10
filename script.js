@@ -86,3 +86,38 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight" && lane < 2) lane++;
   player.style.left = lanes[lane] + "px";
 });
+function createEnemy() {
+  if (gameOver) return;
+
+  let enemy = document.createElement("div");
+  enemy.className = "enemy";
+  let laneIndex = Math.floor(Math.random() * 3);
+  enemy.style.left = lanes[laneIndex] + "px";
+  game.appendChild(enemy);
+
+  let move = setInterval(() => {
+    let top = enemy.offsetTop;
+    enemy.style.top = top + speed + "px";
+
+    // Collision
+    if (
+      top > 360 &&
+      enemy.style.left === player.style.left
+    ) {
+      hit();
+      clearInterval(move);
+    }
+
+    if (top > 520) {
+      enemy.remove();
+      clearInterval(move);
+      score++;
+      document.getElementById("score").innerText = "Score: " + score;
+
+      // Level system
+      if (score % 10 === 0) speed++;
+    }
+  }, 20);
+}
+
+setInterval(createEnemy, 1500);
