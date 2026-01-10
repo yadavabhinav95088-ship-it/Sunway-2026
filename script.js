@@ -58,3 +58,31 @@ function createEnemy() {
 
 // Enemy generation
 setInterval(createEnemy, 1500);
+const game = document.getElementById("game");
+const player = document.getElementById("player");
+
+let lanes = [40, 130, 220];
+let lane = 1;
+let score = 0;
+let speed = 5;
+let gameOver = false;
+
+// Touch controls
+let startX = 0;
+document.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+  if (endX < startX - 40 && lane > 0) lane--;
+  if (endX > startX + 40 && lane < 2) lane++;
+  player.style.left = lanes[lane] + "px";
+});
+
+// Keyboard (optional)
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft" && lane > 0) lane--;
+  if (e.key === "ArrowRight" && lane < 2) lane++;
+  player.style.left = lanes[lane] + "px";
+});
