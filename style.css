@@ -1,58 +1,38 @@
-// --- SCENE & CAMERA ---
-const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x333333, 10, 80); // Depth effect
+body {
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: Arial;
+}
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio); // Ultra sharpness for high-res screens
-renderer.shadowMap.enabled = true; // Enables high-quality shadows
-document.body.appendChild(renderer.domElement);
+#game {
+  width: 300px;
+  height: 500px;
+  background: #555;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid white;
+}
 
-// --- PLAYER & LANES ---
-let playerLane = 0; // -1, 0, 1
-const laneWidth = 4;
-const playerGeo = new THREE.BoxGeometry(1.2, 2.5, 1.2);
-const playerMat = new THREE.MeshStandardMaterial({ color: 0xffff00, metalness: 0.5, roughness: 0.1 });
-const player = new THREE.Mesh(playerGeo, playerMat);
-player.position.set(0, 1.25, 0);
-player.castShadow = true;
-scene.add(player);
+/* Player car */
+#player {
+  width: 60px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  bottom: 20px;
+  left: 120px; /* middle lane */
+  border-radius: 10px;
+}
 
-camera.position.set(0, 6, 12);
-camera.lookAt(0, 2, 0);
-
-// --- MOBILE SWIPE CONTROLS ---
-let startX, startY;
-window.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-});
-
-window.addEventListener('touchend', e => {
-    const endX = e.changedTouches[0].clientX;
-    const endY = e.changedTouches[0].clientY;
-    const dx = endX - startX;
-    const dy = endY - startY;
-
-    if (Math.abs(dx) > Math.abs(dy)) { // Horizontal swipe
-        if (dx > 50 && playerLane < 1) playerLane++;
-        if (dx < -50 && playerLane > -1) playerLane--;
-    } else if (dy < -50) { // Swipe Up to Jump
-        jump();
-    }
-});
-
-function jump() {
-    if (player.position.y <= 1.26) {
-        let up = 0.4;
-        const jumpInt = setInterval(() => {
-            player.position.y += up;
-            up -= 0.02;
-            if (player.position.y <= 1.25) {
-                player.position.y = 1.25;
-                clearInterval(jumpInt);
-            }
-        }, 20);
-    }
+/* Enemy car */
+.enemy {
+  width: 60px;
+  height: 100px;
+  background: yellow;
+  position: absolute;
+  top: -120px;
+  border-radius: 10px;
 }
