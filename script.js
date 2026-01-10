@@ -1,35 +1,24 @@
-// --- ULTRA LIGHTING ---
-const sun = new THREE.DirectionalLight(0xffffff, 1.5);
-sun.position.set(10, 20, 10);
-sun.castShadow = true;
-sun.shadow.mapSize.width = 2048; // High-res shadows
-sun.shadow.mapSize.height = 2048;
-scene.add(sun);
+// Basic Three.js Setup to verify it works
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
 
-const ambient = new THREE.AmbientLight(0x404040, 2); // Bright fill light
-scene.add(ambient);
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-// --- DYNAMIC FLOOR (Infinite Look) ---
-const floorGeo = new THREE.PlaneGeometry(15, 1000);
-const floorMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2 });
-const floor = new THREE.Mesh(floorGeo, floorMat);
-floor.rotation.x = -Math.PI / 2;
-floor.receiveShadow = true;
-scene.add(floor);
+// Add a simple box so you can see something
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
 
-// --- ANIMATION LOOP ---
-let score = 0;
+camera.position.z = 5;
+
 function animate() {
     requestAnimationFrame(animate);
-    
-    // Smooth Lane Switching
-    const targetX = playerLane * laneWidth;
-    player.position.x += (targetX - player.position.x) * 0.15;
-
-    // Movement Simulation
-    score += 1;
-    document.getElementById('ui').innerText = "SCORE: " + score.toString().padStart(4, '0');
-
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
 animate();
+
