@@ -42,7 +42,10 @@ body {
   position: absolute;
   bottom: 20px;
   left: 130px;
-  background: url("player.svg") no-repeat center/cover;
+  background: url("player.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 /* Enemy car */
