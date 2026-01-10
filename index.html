@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Subway Runner Ultra 3D</title>
-    <style>
-        body { margin: 0; overflow: hidden; background: #000; touch-action: none; }
-        #ui { 
-            position: fixed; 
-            top: 10px; 
-            left: 10px; 
-            color: gold; 
-            font-family: 'Courier New', monospace; 
-            font-size: 24px; 
-            z-index: 100;
-        }
-    </style>
+  <title>3 Lane Car Racing Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="ui">SCORE: 0000</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
-    
-    <script src="script.js"></script>
+<div id="game">
+  <div id="player"></div>
+</div>
+
+<h2 id="score">Score: 0</h2>
+
+<script src="script.js"></script>
 </body>
 </html>
-
