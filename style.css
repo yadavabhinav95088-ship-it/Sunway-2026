@@ -19,6 +19,10 @@ body {
 
 canvas {
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 /* Loading Screen */
@@ -176,6 +180,7 @@ canvas {
     padding: 10px;
     font-size: 14px;
     color: #aaa;
+    display: none;
 }
 
 /* Overlay Screens */
@@ -336,4 +341,4 @@ select {
     .control-btn.accelerate {
         width: 160px;
     }
-}
+    }
