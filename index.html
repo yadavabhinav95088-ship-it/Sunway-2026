@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>3D Car Racing Game</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="three.min.js"></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -44,7 +43,7 @@
     </div>
 
     <!-- Game Over Screen -->
-    <div id="gameOverScreen" class="overlay">
+    <div id="gameOverScreen" class="overlay" style="display: none;">
         <div class="overlay-content">
             <h2>Race Complete!</h2>
             <p id="finalTime">Time: 0:00</p>
@@ -77,4 +76,4 @@
 
     <script src="game.js"></script>
 </body>
-                </html>
+    </html>
