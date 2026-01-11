@@ -1,21 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>3 Lane Car Racing Game</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Car Racing UI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="game-container">
+        <!-- Main Menu -->
+        <div id="menuScreen" class="screen active">
+            <div class="title">3D Racing</div>
+            <div class="subtitle">Neon Speed</div>
+            <button id="startBtn" class="btn primary">START RACE</button>
+            <button id="optionsBtn" class="btn secondary">OPTIONS</button>
+        </div>
 
-<div id="game">
-  <div class="line" style="top:0px;"></div>
-<div class="line" style="top:120px;"></div>
-<div class="line" style="top:240px;"></div>
-<div class="line" style="top:360px;"></div>
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <!-- Top HUD: Timer, Position -->
+            <div class="hud-top">
+                <div class="timer">00:00.000</div>
+                <div class="position">P1 / 4</div>
+            </div>
 
-<div id="player"></div>
+            <!-- Right HUD: Speedometer, RPM -->
+            <div class="hud-right">
+                <div class="speedometer">
+                    <div class="speed-needle" id="speedNeedle"></div>
+                    <div class="speed-value" id="speedValue">0</div>
+                    <div class="speed-label">KPH</div>
+                </div>
+                <div class="rpm-meter">
+                    <div class="rpm-bar" id="rpmBar"></div>
+                    <div class="rpm-value" id="rpmValue">0</div>
+                    <div class="rpm-label">RPM</div>
+                </div>
+                <div class="gear">1</div>
+            </div>
 
-<h2 id="score">Score: 0</h2>
+            <!-- Left HUD: Mini-map, Lap -->
+            <div class="hud-left">
+                <div class="minimap">
+                    <canvas id="miniMap" width="120" height="120"></canvas>
+                </div>
+                <div class="lap-info">
+                    <div class="lap-current">LAP 1/3</div>
+                    <div class="lap-time">1:23.456</div>
+                </div>
+            </div>
 
-<script src="script.js"></script>
+            <!-- Bottom HUD: Speed digital, Boost, Score -->
+            <div class="hud-bottom">
+                <div class="digital-speed" id="digitalSpeed">000</div>
+                <div class="boost-bar">
+                    <div class="boost-fill" id="boostFill"></div>
+                    <span>BOOST</span>
+                </div>
+                <div class="score">SCORE: 0</div>
+            </div>
+
+            <!-- Pause Overlay -->
+            <div id="pauseOverlay" class="overlay hidden">
+                <div class="pause-panel">
+                    <h3>PAUSED</h3>
+                    <button id="resumeBtn" class="btn primary">RESUME</button>
+                    <button id="restartBtn" class="btn secondary">RESTART</button>
+                    <button id="menuBtn" class="btn secondary">MAIN MENU</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="screen">
+            <div class="game-over-title">RACE FINISHED</div>
+            <div id="finalTime">00:00.000</div>
+            <div id="finalPosition">1st PLACE</div>
+            <div id="finalScore">SCORE: 0</div>
+            <button id="restartRaceBtn" class="btn primary">RACE AGAIN</button>
+            <button id="menuFromOverBtn" class="btn secondary">MAIN MENU</button>
+        </div>
+
+        <!-- Options Screen -->
+        <div id="optionsScreen" class="screen">
+            <h2>OPTIONS</h2>
+            <div class="option">
+                <label>SOUND</label>
+                <input type="range" id="soundSlider" min="0" max="100" value="80">
+            </div>
+            <div class="option">
+                <label>MUSIC</label>
+                <input type="range" id="musicSlider" min="0" max="100" value="70">
+            </div>
+            <button id="backToMenuBtn" class="btn primary">BACK</button>
+        </div>
+    </div>
+
+    <!-- Controls Info -->
+    <div id="controlsInfo" class="controls">
+        <div>SWIPE / ARROW KEYS TO STEER</div>
+        <div>SPACE / TAP FOR BOOST</div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
